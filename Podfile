@@ -6,6 +6,7 @@ use_frameworks!
 target 'alamofireimagetest' do
   pod 'Alamofire', '~> 3.4'
   pod 'AlamofireImage', '~> 2.0'
+  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end
 
 target 'alamofireimagetestTests' do
