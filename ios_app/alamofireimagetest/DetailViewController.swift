@@ -11,9 +11,12 @@ import UIKit
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
+   
+    @IBOutlet weak var detailImg: UIImageView!
+    
 
 
-    var detailItem: AnyObject? {
+    var detailItem: ImageType? {
         didSet {
             // Update the view.
             self.configureView()
@@ -26,9 +29,16 @@ class DetailViewController: UIViewController {
             if let label = self.detailDescriptionLabel {
                 label.text = detail.description
             }
+            
+            if let img = self.detailImg {
+                detail.load().onSuccess { photo in
+                    img.image = photo
+                }
+            }
         }
     }
-
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
