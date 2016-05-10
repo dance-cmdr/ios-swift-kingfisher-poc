@@ -20,7 +20,7 @@ struct ImageType {
     
     func load(view: UIImageView) {
         let URL = NSURL(string: self.url)!
-        let resource = Resource(downloadURL: URL, cacheKey: "your_customized_key")
+        let resource = Resource(downloadURL: URL)
         
         view.kf_setImageWithResource(resource)
     }
