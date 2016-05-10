@@ -11,6 +11,8 @@ import XCTest
 
 class alamofireimagetestTests: XCTestCase {
     
+    let repo = ImageRepository()
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -21,16 +23,45 @@ class alamofireimagetestTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    func testItmustEventuallyReturnOffers() {
+        
+        let expectation = expectationWithDescription("It loads data from home")
+        
+        repo.find()
+            .onSuccess { data in
+                XCTAssert(data.count > 0)
+                expectation.fulfill()
         }
+            .onFailure { error in
+                XCTFail("repo.find() Error")
+                expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10, handler:nil)
     }
     
+    
+    func testItMustLoadAPhoto() {
+        let expectation = expectationWithDescription("It loads a photo")
+        
+        repo.find()
+            .onSuccess { data in
+                guard data.count > 0 else {
+                    XCTFail("No Data")
+                    expectation.fulfill()
+                    return
+                }
+                
+                data[0].load().onSuccess { _ in
+                    expectation.fulfill()
+                }
+            }
+            .onFailure { error in
+                XCTFail("repo.find() Error")
+                expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10, handler:nil)
+
+    }
 }
