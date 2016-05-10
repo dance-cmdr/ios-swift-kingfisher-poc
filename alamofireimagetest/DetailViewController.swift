@@ -22,6 +22,7 @@ class DetailViewController: UIViewController {
             self.configureView()
         }
     }
+    
 
     func configureView() {
         // Update the user interface for the detail item.
@@ -30,10 +31,8 @@ class DetailViewController: UIViewController {
                 label.text = detail.description
             }
             
-            if let img = self.detailImg {
-                detail.load().onSuccess { photo in
-                    img.image = photo
-                }
+            if let imgView = self.detailImg {
+                detail.load(imgView)
             }
         }
     }

@@ -9,7 +9,7 @@
 
 //import Foundation
 import Alamofire
-import AlamofireImage
+import Kingfisher
 import BrightFutures
 import SwiftyJSON
 
@@ -18,32 +18,13 @@ struct ImageType {
     let url: String
     let description: String
     
-    func load() -> Future<UIImage, CustomError> {
-        let promise = Promise<UIImage, CustomError>()
+    func load(view: UIImageView) {
+        let URL = NSURL(string: self.url)!
+        let resource = Resource(downloadURL: URL, cacheKey: "your_customized_key")
         
-        Alamofire.request(.GET, self.url)
-            .validate(statusCode: 200..<300)
-            .responseImage { response in
-                
-                switch response.result {
-                case .Success:
-                    if let image = response.result.value {
-                        promise.success(image)
-                    }
-                    else {
-                        promise.failure(CustomError(code:2,description: "No Photo"))
-                    }
-                    
-                case .Failure(let error) :
-                    promise.failure(CustomError(code:2,description: "Http Photo Request failed: \(error.localizedDescription)"))
-                }
-        }
-        
-        return promise.future
+        view.kf_setImageWithResource(resource)
     }
 }
-
-
 
 
 
