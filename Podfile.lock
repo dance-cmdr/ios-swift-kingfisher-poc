@@ -1,15 +1,16 @@
 PODS:
   - Alamofire (3.4.0)
+  - AlamofireImage (2.4.0):
+    - Alamofire (~> 3.3)
   - BrightFutures (4.0.1):
     - Result (~> 2.0)
-  - Kingfisher (2.4.1)
   - Result (2.0.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
+  - AlamofireImage (~> 2.0)
   - BrightFutures
-  - Kingfisher (~> 2.4)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -23,9 +24,11 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
   BrightFutures: 786ff7d16e620eb777cf802e545ef7d6237d77f6
-  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: ff752ff484c3b35c192f8337017da6d86c99ad48
+
+COCOAPODS: 1.0.0.beta.4
