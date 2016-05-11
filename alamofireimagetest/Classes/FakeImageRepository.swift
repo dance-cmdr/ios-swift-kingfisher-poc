@@ -9,7 +9,7 @@
 
 //import Foundation
 import Alamofire
-import Kingfisher
+import Haneke
 import BrightFutures
 import SwiftyJSON
 
@@ -20,9 +20,7 @@ struct ImageType {
     
     func load(view: UIImageView) {
         let URL = NSURL(string: self.url)!
-        let resource = Resource(downloadURL: URL)
-        
-        view.kf_setImageWithResource(resource)
+        view.hnk_setImageFromURL(URL)
     }
 }
 
@@ -44,16 +42,16 @@ struct CustomError: ErrorType {
 class ImageFactory {
     
     
-    func make(data: JSON) -> [ImageType] {
+    func make(data: SwiftyJSON.JSON) -> [ImageType] {
         return makeImages(data)
     }
     
     
     
-    func makeImages(data: JSON) -> [ImageType] {
+    func makeImages(data: SwiftyJSON.JSON) -> [ImageType] {
         var images = [ImageType]()
         
-        for (_,d):(String, JSON) in data {
+        for (_,d):(String, SwiftyJSON.JSON) in data {
             
             do {
                 let image = try makeImage(d)
@@ -68,7 +66,7 @@ class ImageFactory {
     
     
     
-    func makeImage(data: JSON) throws -> ImageType {
+    func makeImage(data: SwiftyJSON.JSON) throws -> ImageType {
         
         guard (data["images"]["dealSmall"].string != nil) else {
             throw CustomError(code: 3, description: "Value out of range")
