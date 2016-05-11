@@ -9,7 +9,7 @@
 
 //import Foundation
 import Alamofire
-import Kingfisher
+import AlamofireImage
 import BrightFutures
 import SwiftyJSON
 
@@ -20,9 +20,7 @@ struct ImageType {
     
     func load(view: UIImageView) {
         let URL = NSURL(string: self.url)!
-        let resource = Resource(downloadURL: URL)
-        
-        view.kf_setImageWithResource(resource)
+        view.af_setImageWithURL(URL)
     }
 }
 
